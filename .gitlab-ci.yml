@@ -34,7 +34,7 @@ test-job2:
     - echo "grep tests failed"; exit 1 
     - else
     - echo "grep tests succeeded"; fi
-   tags:
+  tags:
     - test
 
 deploy-prod:
