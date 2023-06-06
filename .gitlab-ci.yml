@@ -14,7 +14,7 @@ test-job:
     - cppcheck src/cat/*.c src/grep/*.c
     - cp materials/linters/.clang-format src/.clang-format
     - clang-format -n src/cat/*.c src/grep/*.c
-    - if [[ $? ]]; then
+    - if [[ "$?" != "0" ]]; then
     - exit 1; fi
     - rm src/.clang-format
   tags:
@@ -25,12 +25,12 @@ test-job2:
   script:
     - echo "Testing s21_cat and s21_grep"
     - code1=$(cd src/cat && make s21_cat_tests)
-    - if [[ code1]]; then
+    - if [[ "$code1" != "0" ]]; then
     - echo "cat tests failed"; exit 1
     - else
     - echo "cat tests succeeded"; fi
     - code2=$(cd ../grep && make s21_grep_tests)
-    - if [[ code2]]; then
+    - if [[ "$code2" != "0" ]]; then
     - echo "grep tests failed"; exit 1 
     - else
     - echo "grep tests succeeded"; fi
