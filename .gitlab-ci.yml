@@ -1,14 +1,19 @@
 build-job:
   stage: build
   script:
-    - echo "Hello, $GITLAB_USER_LOGIN!"
+    - echo "Building s21_cat and s21_grep"
+    - cd ~/C3_SimpleBashUtils-0/src && make all
   tags:
     - test
 
-test-job1:
-  stage: test
+test-job:
+  stage: style
   script:
-    - echo "This job tests something"
+    - echo "Testing style"
+    - cd ~/C3_SimpleBashUtils-0/src && cppcheck *.c *.h
+    - cp ~/C3_SimpleBashUtils-0/materials/linters/.clang-format ~/C3_SimpleBashUtils-0/src/.clang-format
+    - cd ~/C3_SimpleBashUtils-0/src && clang-format -n *.c *.h tests/*.c
+    - rm ~/C3_SimpleBashUtils-0/src/.clang-format1
   tags:
     - test
 
