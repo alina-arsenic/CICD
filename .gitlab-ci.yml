@@ -7,7 +7,7 @@ build-job:
     - test
 
 test-job:
-  stage: style
+  stage: test
   script:
     - echo "Testing style"
     - cd ~/C3_SimpleBashUtils-0/src && cppcheck *.c *.h
