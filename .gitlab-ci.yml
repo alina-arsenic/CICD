@@ -2,7 +2,8 @@ build-job:
   stage: build
   script:
     - echo "Building s21_cat and s21_grep"
-    - cd src && make all
+    - cd src/cat && make all
+    - cd src/grep && make all
   tags:
     - test
 
@@ -10,10 +11,10 @@ test-job:
   stage: test
   script:
     - echo "Testing style"
-    - cd src && cppcheck *.c *.h
+    - cppcheck src/cat/*.c src/grep/*.c
     - cp materials/linters/.clang-format src/.clang-format
-    - cd src && clang-format -n *.c *.h tests/*.c
-    - rm src/.clang-format1
+    - clang-format -n src/cat/*.c src/grep/*.c
+    - rm src/.clang-format
   tags:
     - test
 
