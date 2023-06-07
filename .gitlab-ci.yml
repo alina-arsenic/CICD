@@ -10,8 +10,6 @@ build-job:
     - echo "Building s21_cat and s21_grep"
     - cd src && make all
   artifacts:
-    paths:
-      - src/artifacts/build
     expire_in: 30 days
   tags:
     - test
