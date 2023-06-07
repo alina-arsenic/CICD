@@ -4,10 +4,16 @@ CFLAGS=-Wall -Werror -Wextra
 all: s21_grep s21_cat
 
 s21_cat:
-	gcc $(CFLAGS) cat/s21_cat.c -o cat/s21_cat
+	gcc $(CFLAGS) s21_cat.c -o s21_cat
 
 s21_grep:
-	gcc $(CFLAGS) grep/s21_grep.c -o grep/s21_grep
+	gcc $(CFLAGS) s21_grep.c -o s21_grep
+
+s21_grep_tests:
+	tests/s21_grep_tests.sh
+
+s21_cat_tests:
+	tests/s21_cat_tests.sh
 
 clean:
-	rm -f ./cat/s21_cat ./grep/s21_grep
+	rm -f s21_cat s21_grep
