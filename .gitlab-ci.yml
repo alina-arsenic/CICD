@@ -28,7 +28,7 @@ test-job:
     - echo "cat tests failed"; exit 1
     - else
     - echo "cat tests succeeded"; fi
-    - code2=$(make s21_grep_tests)
+    - code2=$(cd src && make s21_grep_tests)
     - if [ $code2 -ne 0 ]; then
     - echo "grep tests failed"; exit 1 
     - else
