@@ -16,10 +16,11 @@ test-style:
     - echo "Testing style"
     - cppcheck src/*.c
     - cp materials/linters/.clang-format src/.clang-format
-    - clang-format -n src/*.c
-    - if [ $? -ne 0 ]; then
+    - clang-format -n src/*.c 2> src/report_style
+    - if [ -s src/report_style ]; then
+    - cat src/report_style
     - exit 1; fi
-    - rm src/.clang-format
+    - rm src/.clang-format src/report_style
   tags:
     - test
 
