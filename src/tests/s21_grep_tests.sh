@@ -3,7 +3,7 @@ rm -f ./tests_log
 success=0
 fail=0
 
-TEST_DIR="tests/"
+TEST_DIR="tests"
 GREP_DIR="."
 
 # "-o"
