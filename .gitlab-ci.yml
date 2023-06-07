@@ -1,3 +1,9 @@
+stages:
+  - build
+  - style
+  - test
+  - deploy
+
 build-job:
   stage: build
   script:
@@ -10,8 +16,8 @@ build-job:
   tags:
     - test
 
-test-style:
-  stage: test
+style-job:
+  stage: style
   script:
     - echo "Testing style"
     - cppcheck src/*.c
