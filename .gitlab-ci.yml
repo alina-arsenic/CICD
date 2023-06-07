@@ -11,8 +11,8 @@ build-job:
     - cd src && make all
   artifacts:
     paths:
-      - src/s21_cat.c
-      - src/s21_grep.c
+      - src/s21_cat
+      - src/s21_grep
     expire_in: 30 days
   tags:
     - test
