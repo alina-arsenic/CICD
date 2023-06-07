@@ -40,8 +40,8 @@ echo "See details in tests_log"
 
 rm -f temp*
 
-if [ $fail -eq 0 ]; then
-    exit 0
-else
+if [[ $fail -ne 0 ]]; then
     exit 1
+else
+    exit 0
 fi
