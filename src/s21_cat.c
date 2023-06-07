@@ -9,9 +9,7 @@ void get_options(int *options, int argc, char **argv);
 void get_files(char **files, int *n, int argc, char **argv);
 void numerate_line(char *line, int *lineNumber);
 
-int main
-(int argc, char **argv) 
-{
+int main(int argc, char **argv) {
   int options[5];
   get_options(options, argc, argv);
 
