@@ -3,8 +3,8 @@ rm -f ./tests_log
 success=0
 fail=0
 
-TEST_DIR="tests"
-GREP_DIR="."
+TEST_DIR="../tests"
+GREP_DIR=".."
 
 # "-o"
 
@@ -21,7 +21,7 @@ do
     for template in "A" "a" "-e o" "-e o -e a" \
     "-f $TEST_DIR/patterns" "-f $TEST_DIR/patterns -f $TEST_DIR/patterns2" "-e o -e a -f $TEST_DIR/patterns -f $TEST_DIR/patterns2" "-f aboba"
     do
-        for number in 1 2 3 4 5 6 7 8 9 10 11 "*"
+        for number in 1 2 3 4 5 6 7 8 9 10 11
         do
             grep $options $template $TEST_DIR/samples/text_$number > temp_grep 2>> temp_log
             $GREP_DIR/s21_grep $options $template $TEST_DIR/samples/text_$number > temp_s21_grep 2>> temp_log

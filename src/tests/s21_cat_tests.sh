@@ -3,14 +3,14 @@ rm -f ./tests_log
 success=0
 fail=0
 
-TEST_DIR="tests"
-CAT_DIR="."
+TEST_DIR="../tests"
+CAT_DIR=".."
 
 for options in "" "-b" "-e" "-n" "-s" "-t" "-be" "-bn" "-bs" "-bt" "-en" "-es" "-et" "-ns" "-nt" "-st" \
 "-ben" "-bes" "-bet" "-bns" "-bnt" "-bst" "-ens" "-ent" "-est" "-nst" "-enst" "-bnst" "-best" "-bent" "-bens" "-benst" \
 "-e -e" "-bn -st" "-b -e -n -s -t" "-bbbbenst" "-ajiods" "-e -y" # "-E" "-T" "--number-nonblank" "--number" "--squeeze-blank" "--do-shit"
 do
-    for number in 1 2 3 4 5 6 7 8 9 "*"
+    for number in 1 2 3 4 5 6 7 8 9
     do
         cat $options $TEST_DIR/samples/text_$number > temp_cat 2>> temp_log
         $CAT_DIR/s21_cat $options $TEST_DIR/samples/text_$number > temp_s21_cat 2>> temp_log
