@@ -13,7 +13,7 @@ test-style:
     - cppcheck src/*.c
     - cp materials/linters/.clang-format src/.clang-format
     - clang-format -n src/*.c
-    - if [[ "$?" != "0" ]]; then
+    - if [ $? -ne 0 ]; then
     - exit 1; fi
     - rm src/.clang-format
   tags:
@@ -24,12 +24,12 @@ test-job:
   script:
     - echo "Testing s21_cat and s21_grep"
     - code1=$(cd src && make s21_cat_tests)
-    - if [[ "$code1" != "0" ]]; then
+    - if [ $code1 -ne 0 ]; then
     - echo "cat tests failed"; exit 1
     - else
     - echo "cat tests succeeded"; fi
     - code2=$(make s21_grep_tests)
-    - if [[ "$code2" != "0" ]]; then
+    - if [ $code2 -ne 0 ]; then
     - echo "grep tests failed"; exit 1 
     - else
     - echo "grep tests succeeded"; fi
