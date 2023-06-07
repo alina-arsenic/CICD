@@ -26,6 +26,8 @@ test-style:
 
 test-job:
   stage: test
+  needs:
+    - test-style
   script:
     - echo "Testing s21_cat and s21_grep"
     - cd src
