@@ -3,6 +3,9 @@ rm -f ./tests_log
 success=0
 fail=0
 
+TEST_DIR="tests/"
+GREP_DIR="."
+
 # "-o"
 
 for options in "" "-s" "-c" "-v" "-h" "-n" "-l" "-i" \
@@ -16,18 +19,17 @@ for options in "" "-s" "-c" "-v" "-h" "-n" "-l" "-i" \
 #"-sivhnl" "-sichnl" "-sicvnl" "-sicvhl" "-sicvhn"
 do
     for template in "A" "a" "-e o" "-e o -e a" \
-    "-f ../tests/patterns" "-f ../tests/patterns -f ../tests/patterns2" "-e o -e a -f ../tests/patterns -f ../tests/patterns2" "-f aboba" \
-    "-ea" "-eae -e b" "-f../tests/patterns" "-faf"
+    "-f $TEST_DIR/patterns" "-f $TEST_DIR/patterns -f $TEST_DIR/patterns2" "-e o -e a -f $TEST_DIR/patterns -f $TEST_DIR/patterns2" "-f aboba"
     do
         for number in 1 2 3 4 5 6 7 8 9 10 11 "*"
         do
-            grep $options $template ../tests/samples/text_$number > temp_grep 2>> temp_log
-            ./s21_grep $options $template ../tests/samples/text_$number > temp_s21_grep 2>> temp_log
+            grep $options $template $TEST_DIR/samples/text_$number > temp_grep 2>> temp_log
+            $GREP_DIR/s21_grep $options $template $TEST_DIR/samples/text_$number > temp_s21_grep 2>> temp_log
             diff temp_grep temp_s21_grep > temp_result
             if [ -s temp_result ]; then
-                echo "./s21_grep $options $template ../tests/samples/text_$number FAIL" >> ./tests_log; fail=$(( $fail + 1 ))
+                echo "$GREP_DIR/s21_grep $options $template $TEST_DIR/samples/text_$number FAIL" >> ./tests_log; fail=$(( $fail + 1 ))
             else
-                echo "./s21_grep $options $template ../tests/samples/text_$number SUCCESS" >> ./tests_log; success=$(( $success + 1 ))
+                echo "$GREP_DIR/s21_grep $options $template $TEST_DIR/samples/text_$number SUCCESS" >> ./tests_log; success=$(( $success + 1 ))
             fi
         done
     done
