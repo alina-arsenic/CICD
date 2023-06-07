@@ -37,7 +37,6 @@ echo "Tests are done!"
 echo "Successfully: $success"
 echo "Failed: $fail"
 echo "See details in tests_log"
-
 rm -f temp*
 
 if [[ $fail -ne 0 ]]; then
