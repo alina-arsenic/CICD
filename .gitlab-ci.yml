@@ -52,6 +52,7 @@ test-job:
 deploy-prod:
   stage: deploy
   script:
+    - ls src
     - bash src/copy_files.sh
     - if [ $? -ne 0 ]; then
     - echo "copying artefacts failed"; exit 1
