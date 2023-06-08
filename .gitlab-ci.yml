@@ -9,6 +9,9 @@ build-job:
   script:
     - echo "Building s21_cat and s21_grep"
     - cd src && make all
+    - if [ "$?" -ne 0 ]; then
+    - bash src/notify.sh "build failed"; exit 1; fi
+    - bash src/notify.sh "build succeeded";
   artifacts:
     paths:
       - src/s21_cat
@@ -26,8 +29,9 @@ style-job:
     - clang-format -n src/*.c 2> src/report_style
     - if [ -s src/report_style ]; then
     - cat src/report_style
-    - exit 1; fi
+    - bash src/notify.sh "style tests failed"; exit 1; fi
     - rm src/.clang-format src/report_style
+    - bash src/notify.sh "style tests succeeded";
   tags:
     - test
 
@@ -38,14 +42,11 @@ test-job:
     - cd src
     - code1=$(bash tests/s21_cat_tests.sh)
     - if [ "$code1" -ne 0 ]; then
-    - echo "cat tests failed"; exit 1
-    - else
-    - echo "cat tests succeeded"; fi
+    - bash src/notify.sh "cat tests failed"; exit 1; fi
     - code2=$(bash tests/s21_grep_tests.sh)
     - if [ "$code2" -ne 0 ]; then
-    - echo "grep tests failed"; exit 1 
-    - else
-    - echo "grep tests succeeded"; fi
+    - bash src/notify.sh "grep tests failed"; exit 1; fi
+    - bash src/notify.sh "cat and grep tests succeeded";
   tags:
     - test
 
@@ -53,14 +54,12 @@ deploy-prod:
   stage: deploy
   script:
     - if [ -z "$PASS" ]; then
-    - echo "No deploy in automatic mode!"
-    - bash src/notify.sh "Tests passed, no deploy" exit 0;
+    - bash src/notify.sh "no deploy in automatic mode"; exit 0
     - fi
     - bash src/copy_files.sh $PASS
     - if [ $? -ne 0 ]; then
-    - bash src/notify.sh "Tests passed, deploy failed"
-    - echo "copying artefacts failed"; exit 1
+    - bash src/notify.sh "deploy failed"; exit 1
     - fi
-    - bash src/notify.sh "Tests passed, project successfully deployed"
+    - bash src/notify.sh "project successfully deployed"
   tags:
     - test
