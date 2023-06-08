@@ -53,7 +53,13 @@ deploy-prod:
   stage: deploy
   script:
     - ls src
-    - bash src/copy_files.sh
+    - scp src/s21_cat weaveryu@10.10.10.3:~/s21_cat
+    - scp src/s21_grep weaveryu@10.10.10.3:~/s21_grep
+    - ssh weaveryu@10.10.10.3 'sudo cp ~/s21_cat /usr/local/bin/s21_cat'
+    - ssh weaveryu@10.10.10.3 'sudo cp ~/s21_grep /usr/local/bin/s21_grep'
+    - ssh weaveryu@10.10.10.3 'rm -f ~/s21_cat'
+    - ssh weaveryu@10.10.10.3 'rm -f ~/s21_grep'
+
     - if [ $? -ne 0 ]; then
     - echo "copying artefacts failed"; exit 1
     - fi
