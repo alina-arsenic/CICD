@@ -52,7 +52,7 @@ test-job:
 deploy-prod:
   stage: deploy
   script:
-    - sudo bash src/copy_files.sh
+    - bash src/copy_files.sh
     - if [ $? -ne 0 ]; then
     - echo "copying artefacts failed"; exit 1
     - fi
