@@ -9,6 +9,7 @@ build-job:
   script:
     - echo "Building s21_cat and s21_grep"
     - cd src && make all
+    - cd ..
     - if [ "$?" -ne 0 ]; then
     - bash src/notify.sh "build failed"; exit 1; fi
     - bash src/notify.sh "build succeeded";
@@ -42,11 +43,11 @@ test-job:
     - cd src
     - code1=$(bash tests/s21_cat_tests.sh)
     - if [ "$code1" -ne 0 ]; then
-    - bash src/notify.sh "cat tests failed"; exit 1; fi
+    - bash notify.sh "cat tests failed"; exit 1; fi
     - code2=$(bash tests/s21_grep_tests.sh)
     - if [ "$code2" -ne 0 ]; then
-    - bash src/notify.sh "grep tests failed"; exit 1; fi
-    - bash src/notify.sh "cat and grep tests succeeded";
+    - bash notify.sh "grep tests failed"; exit 1; fi
+    - bash notify.sh "cat and grep tests succeeded";
   tags:
     - test
 
