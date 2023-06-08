@@ -52,6 +52,9 @@ test-job:
 deploy-prod:
   stage: deploy
   script:
+    - if [ -z "$PASS" ]; then
+    - echo "No deploy in automatic mode!"; exit 0;
+    - fi
     - bash src/copy_files.sh $PASS
     - if [ $? -ne 0 ]; then
     - echo "copying artefacts failed"; exit 1
