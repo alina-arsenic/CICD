@@ -53,11 +53,14 @@ deploy-prod:
   stage: deploy
   script:
     - if [ -z "$PASS" ]; then
-    - echo "No deploy in automatic mode!"; exit 0;
+    - echo "No deploy in automatic mode!"
+    - bash src/notify.sh "Tests passed, no deploy" exit 0;
     - fi
     - bash src/copy_files.sh $PASS
     - if [ $? -ne 0 ]; then
+    - bash src/notify.sh "Tests passed, deploy failed"
     - echo "copying artefacts failed"; exit 1
     - fi
+    - bash src/notify.sh "Tests passed, project successfully deployed"
   tags:
     - test
